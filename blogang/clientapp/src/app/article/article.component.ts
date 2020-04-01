@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NewarticleComponent} from '../newarticle/newarticle.component'
 
 @Component({
   selector: 'app-article',
