@@ -14,7 +14,17 @@ namespace blogang.Controllers
 		{
 			return View();
 		}
+/*
+		[HttpPost("api/Articles/Create")]
+		[Route("api/Articles/Create")]
+		[Consumes("application/json")]
+		public IActionResult Create([FromBody] Article value)
+		{
+			Debug.WriteLine("post request: " + value);
 
+			return CreatedAtAction("Create", new Article() { Title = value.Title, ArticleDate = value.ArticleDate });
+		}
+*/
 		public IActionResult Privacy()
 		{
 			return View();
