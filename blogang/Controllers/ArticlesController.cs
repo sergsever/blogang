@@ -11,21 +11,22 @@ namespace blogang.Controllers
 {
 	[Route("{controller}/{Action}")]
 	[ApiController]
-	public class ArticlesController : ControllerBase
+	public class ArticlesController : Controller
 	{
+		private ArticleDAO dao { get; set; }
+		public ArticlesController(ArticleDAO dao)
+		{
+			this.dao = dao;
+		}
 		// GET: api/Articles
 		[HttpGet]
-		public IEnumerable<string> Get()
+		public JsonResult Get()
 		{
-			return new string[] { "value1", "value2" };
+			Article article = dao.GetCurrent();
+			return Json(article);
+
 		}
 
-		// GET: api/Articles/5
-		[HttpGet("{id}", Name = "Get")]
-		public string Get(int id)
-		{
-			return "value";
-		}
 
 		// POST: api/Articles
 		[HttpPost("/Articles/Create")]
@@ -34,6 +35,13 @@ namespace blogang.Controllers
 		public IActionResult Create([FromBody] Article value)
 		{
 			Debug.WriteLine("post request: " + value.Title);
+			try { 
+				dao.Add(value);
+			}
+			catch(Exception e)
+			{
+				throw new Exception("Error when an Article was adding" + e.Message);
+			}
 			
 			return CreatedAtAction("Create", new Article() {Id=1, Title=value.Title, ArticleDate=value.ArticleDate });
 		}

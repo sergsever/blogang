@@ -3,6 +3,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs';
 
+import {LogService} from '../logger';
+
+var output = console.log;
+
+
 @Component({
   selector: 'app-newarticle',
   templateUrl: './newarticle.component.html',
@@ -19,11 +24,17 @@ export class NewarticleComponent implements OnInit {
 
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient)
+  { 
+    //window.console.log('new article constructor:\n');
+    console.log('new constructor');
+  }
 
   ngOnInit(): void {
+    console.log('new init');
     this.ArticleDate = new Date();
     this.baseUrl = 'http://localhost:61260/'
+    output('new Init\n');
   }
 
   /*
