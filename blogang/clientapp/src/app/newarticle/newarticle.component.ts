@@ -55,10 +55,11 @@ export class NewarticleComponent implements OnInit {
 */
     sendPost()
     {
-      console.log('new send post:\n');
+      
+      console.log('new send post: date: ' + this.ArticleDate);
       const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })}
-      const body = {id: 0, title: this.Title, content: this.Content, date: this.ArticleDate}
+      const body = {id: 0, title: this.Title, content: this.Content, ArticleDate: this.ArticleDate}
       this.http.post<any>('/Articles/Create', body, httpOptions).subscribe(value =>{
         console.log('subscribe value: ' + value.id);
       },

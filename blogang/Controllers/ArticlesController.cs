@@ -34,7 +34,7 @@ namespace blogang.Controllers
 		[Consumes("application/json")]
 		public IActionResult Create([FromBody] Article value)
 		{
-			Debug.WriteLine("post request: " + value.Title);
+			Debug.WriteLine("post request: " + value.ArticleDate);
 			try { 
 				dao.Add(value);
 			}
@@ -43,7 +43,7 @@ namespace blogang.Controllers
 				throw new Exception("Error when an Article was adding" + e.Message);
 			}
 			
-			return CreatedAtAction("Create", new Article() {Id=1, Title=value.Title, ArticleDate=value.ArticleDate });
+			return CreatedAtAction("Create", new Article() {Id=1, Title=value.Title, ArticleDate= DateTime.Now });
 		}
 
 		// PUT: api/Articles/5

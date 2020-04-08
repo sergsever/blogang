@@ -18,6 +18,7 @@ namespace blogang.Data
 		public virtual void Add(EntityT entity)
 		{
 			dbcontext.Attach<EntityT>(entity);
+			dbcontext.SaveChanges();
 		}
 
 
