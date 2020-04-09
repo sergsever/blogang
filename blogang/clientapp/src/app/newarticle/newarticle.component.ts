@@ -1,9 +1,10 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, Output } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs';
 
 import {LogService} from '../logger';
+import { EventEmitter } from 'events';
 
 var output = console.log;
 
@@ -20,7 +21,14 @@ export class NewarticleComponent implements OnInit {
   Title = '';
   Content = '';
   ArticleDate = null;
+  modelState = '';
   baseUrl = '';
+  @Output()  state = new EventEmitter();
+  onStateChange(state : string)
+  {
+    this.modelState = state;
+    this.state.emit(state);
+  }
 
   
 
@@ -62,6 +70,7 @@ export class NewarticleComponent implements OnInit {
       const body = {id: 0, title: this.Title, content: this.Content, ArticleDate: this.ArticleDate}
       this.http.post<any>('/Articles/Create', body, httpOptions).subscribe(value =>{
         console.log('subscribe value: ' + value.id);
+        this.onStateChange('new');
       },
       error => {
         console.log('subscribe error:' + error.message);

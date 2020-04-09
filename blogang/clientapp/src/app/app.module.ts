@@ -7,11 +7,13 @@ import 'rxjs/add/operator/catch';
 
 import { ArticleComponent } from './article/article.component';
 import { NewarticleComponent } from './newarticle/newarticle.component';
+import { AppComponent } from './app/app.component';
 
 @NgModule({
   declarations: [
     ArticleComponent,
-    NewarticleComponent
+    NewarticleComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +21,6 @@ import { NewarticleComponent } from './newarticle/newarticle.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [ArticleComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

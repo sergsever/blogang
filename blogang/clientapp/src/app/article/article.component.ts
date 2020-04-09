@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {NewarticleComponent} from '../newarticle/newarticle.component'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Response} from '@angular/http'
@@ -10,11 +10,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./article.component.css']
 })
 
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, OnChanges {
   Title = ''
   Content = '';
   data : any = null;
   ArticleDate = '';
+
+  @Input()  modelState : string;
+  getRunChangeDetection()
+  {
+    console.log('article check changes');
+  }
 
   constructor(private http: HttpClient) 
   { 
@@ -26,6 +32,7 @@ export class ArticleComponent implements OnInit {
     console.log('OnInit:\n');
     this.Title = 'BigTitle';
     this.Content = 'smart content';
+    this.modelState = 'old';
     
     this.getData();
     /*
@@ -35,6 +42,12 @@ export class ArticleComponent implements OnInit {
   */      
       
     }
+
+    public ngOnChanges()
+    {
+      console.log('article on changes:');
+    }
+
     getData() : Observable<any> {
       var res = null;
       console.log('getdata: starts\n');
