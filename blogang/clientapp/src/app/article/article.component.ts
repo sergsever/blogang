@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
 import {NewarticleComponent} from '../newarticle/newarticle.component'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Response} from '@angular/http'
 import { Observable } from 'rxjs';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-article',
@@ -16,7 +17,15 @@ export class ArticleComponent implements OnInit, OnChanges {
   data : any = null;
   ArticleDate = '';
 
+  state : string = '';
   @Input()  modelState : string;
+@Output() stateChanged : EventEmitter<string> = new EventEmitter<string>();
+
+changeState(newstate : string ) 
+{
+    this.state = newstate;
+    this.stateChanged.emit(this.state);
+}
   getRunChangeDetection()
   {
     console.log('article check changes');
@@ -25,6 +34,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   constructor(private http: HttpClient) 
   { 
     console.log('article constructor\n');
+    this.stateChanged = new EventEmitter();
   }
 
   public ngOnInit()  
@@ -32,7 +42,7 @@ export class ArticleComponent implements OnInit, OnChanges {
     console.log('OnInit:\n');
     this.Title = 'BigTitle';
     this.Content = 'smart content';
-    this.modelState = 'old';
+   // this.modelState = 'old';
     
     this.getData();
     /*

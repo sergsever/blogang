@@ -21,11 +21,13 @@ export class NewarticleComponent implements OnInit {
   Title = '';
   Content = '';
   ArticleDate = null;
-  modelState = '';
   baseUrl = '';
   @Output()  state = new EventEmitter();
+  modelState = '';
+
   onStateChange(state : string)
   {
+    
     this.modelState = state;
     this.state.emit(state);
   }
@@ -39,6 +41,7 @@ export class NewarticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onStateChange('init');
     console.log('new init');
     this.ArticleDate = new Date();
     this.baseUrl = 'http://localhost:61260/'
