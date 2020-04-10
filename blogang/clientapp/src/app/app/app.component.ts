@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     this.state = 'oninit';
   }
 
-  getState(state: string) 
+  setState(state: string) 
   {
     console.log('app: getstate():' + state);
     this.state = state;

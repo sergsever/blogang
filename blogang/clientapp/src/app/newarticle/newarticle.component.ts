@@ -4,7 +4,7 @@ import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs';
 
 import {LogService} from '../logger';
-import { EventEmitter } from 'events';
+import { EventEmitter } from '@angular/core';
 
 var output = console.log;
 
@@ -22,7 +22,8 @@ export class NewarticleComponent implements OnInit {
   Content = '';
   ArticleDate = null;
   baseUrl = '';
-  @Output()  state = new EventEmitter();
+  @Output()  state : EventEmitter<string> = new EventEmitter<string>();
+
   modelState = '';
 
   onStateChange(state : string)

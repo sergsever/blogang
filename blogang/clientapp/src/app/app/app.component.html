@@ -1,7 +1,7 @@
 <div id ="article">
-    <app-article [modelState]="state" (stateChanged) = "getState($event)"></app-article>
+    <app-article [modelState]="state" (stateChanged) = "setState($event)"></app-article>
 </div>
 <div id = "new-article">
-    <app-newarticle></app-newarticle>
+    <app-newarticle (state) = "setState($event)"></app-newarticle>
     <h4>{{state}}</h4>
 </div>

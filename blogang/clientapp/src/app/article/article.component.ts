@@ -16,9 +16,16 @@ export class ArticleComponent implements OnInit, OnChanges {
   Content = '';
   data : any = null;
   ArticleDate = '';
+  _modelState : string;
 
   state : string = '';
-  @Input()  modelState : string;
+  @Input()
+  set modelState(state : string)
+  {
+    console.log('article set modelState');
+    this._modelState = state;
+
+  }
 @Output() stateChanged : EventEmitter<string> = new EventEmitter<string>();
 
 changeState(newstate : string ) 
