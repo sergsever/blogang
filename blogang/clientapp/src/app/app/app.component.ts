@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.state = 'oninit';
   }
 
   setState(state: string) 

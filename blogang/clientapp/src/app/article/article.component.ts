@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Response} from '@angular/http'
 import { Observable } from 'rxjs';
 import { EventEmitter } from '@angular/core';
+//import {EventsService} from 'angular-event-service'
 
 @Component({
   selector: 'app-article',
@@ -12,6 +13,7 @@ import { EventEmitter } from '@angular/core';
 })
 
 export class ArticleComponent implements OnInit, OnChanges {
+
   Title = ''
   Content = '';
   data : any = null;
@@ -23,7 +25,8 @@ export class ArticleComponent implements OnInit, OnChanges {
   set modelState(state : string)
   {
     console.log('article set modelState');
-    this._modelState = state;
+      this._modelState = state;
+      this.getData();
 
   }
 @Output() stateChanged : EventEmitter<string> = new EventEmitter<string>();
@@ -38,9 +41,9 @@ changeState(newstate : string )
     console.log('article check changes');
   }
 
-  constructor(private http: HttpClient) 
+    constructor(private http: HttpClient) 
   { 
-    console.log('article constructor\n');
+        console.log('article constructor\n');
     this.stateChanged = new EventEmitter();
   }
 
@@ -51,18 +54,19 @@ changeState(newstate : string )
     this.Content = 'smart content';
    // this.modelState = 'old';
     
-    this.getData();
     /*
     .subscribe(resp => {
       console.log('getdata: subs\n');
       this.data = resp} );
   */      
-      
+ this.getData();
     }
 
     public ngOnChanges()
     {
       console.log('article on changes:');
+      this.getData();
+
     }
 
     getData() : Observable<any> {
